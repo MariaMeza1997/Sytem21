@@ -1210,12 +1210,11 @@ body .theme-button-one:hover {background:#000f32; }
 }
 /*------------------ Short Banner ------------------*/
 .short-banner {
-  background: url(../images/home/14.jpg) no-repeat center center;
-  background-size: cover;
-  background-color: #707d9e;
+  background-color: #333;
+  background-image: url(../images/home/pattern2.png);
+  padding: 40px 0;
 }
 .short-banner .overlay {
-  background: rgba(255,255,255,0.4);
   padding: 52px 0;
   text-align: center;
 }
@@ -1224,6 +1223,7 @@ body .theme-button-one:hover {background:#000f32; }
   line-height: 48px;
   width: 65%;
   margin: 0 auto;
+  color: white;
 }
 /*----------------- Latest News ------------------- */
 .our-blog .single-blog .image-box {
