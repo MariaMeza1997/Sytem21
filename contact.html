@@ -96,14 +96,14 @@
 						<div class="col-lg-5 col-12"><img src="images/contact.jpg"></div>
 						<div class="col-lg-7 col-12">
 							<div class="form-wrapper">
-								<form action="inc/sendemail.php" class="theme-form-one form-validation" autocomplete="off">
+								<form class="theme-form-one form-validation" onsubmit="miFuncion(event)">
 									<div class="row">
-										<div class="col-sm-6 col-12"><input type="text" placeholder="Nombre *" name="name"></div>
-										<div class="col-sm-6 col-12"><input type="text" placeholder="Telefono *" name="phone"></div>
-										<div class="col-sm-6 col-12"><input type="email" placeholder="Correo electr贸nico *" name="email"></div>
-										<div class="col-sm-6 col-12"><input type="text" placeholder="Sitio web *" name="web"></div>
-										<div class="col-12"><textarea placeholder="Message" name="Mensaje"></textarea></div>
-										<div class="col-md-4"><button class="theme-button-one">Enviar</button></div>
+										<div class="col-sm-6 col-12"><input type="text" placeholder="Nombre *"  required id="nombre" name="nombre"></div>
+										<div class="col-sm-6 col-12"><input type="text" placeholder="Telefono *" required id="phone" name="phone"></div>
+										<div class="col-sm-6 col-12"><input type="email" placeholder="Correo electr贸nico *" required id="email" name="email"></div>
+										<div class="col-sm-6 col-12"><input type="text" placeholder="Sitio web *"  id="services" name="services"></div>
+										<div class="col-12"><textarea placeholder="Message" id="mensaje" name="mensaje"></textarea></div>
+										<div class="col-md-4"><button class="theme-button-one"  type="submit" >Enviar</button></div>
 										<div class="col-md-6"><div class="g-recaptcha" data-sitekey="6Lc1xzMpAAAAAMGua2f3rcboBNkowH60lGRlY6tg" style="padding-bottom:10px"></div></div>
 									</div> <!-- /.row -->
 										
@@ -241,6 +241,30 @@
 
 		<!-- Theme js -->
 		<script src="js/theme.js"></script>
+		<script>
+		const nombre = document.getElementById("nombre")
+		const mail = document.getElementById("email")
+		const phone = document.getElementById("phone")
+		const mensaje = document.getElementById("mensaje")
+		const services = document.getElementById("services")
+		
+		     function miFuncion(event) {
+		        event.preventDefault();
+                var response = grecaptcha.getResponse();
+            
+                if(response.length == 0){
+                 console.log("Captcha no verificado")
+                } else {
+                  alert("Correo Enviado");
+                   $.ajax({
+        				url:"/correoHome.php",
+        				data:{nombre:nombre.value, email:mail.value, telefono:phone.value, mensaje:mensaje.value , servicio:services.value},
+        				method:'POST',
+
+        			});
+                }
+              }
+		</script>
 		</div> <!-- /.main-page-wrapper -->
 	</body>
 </html>

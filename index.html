@@ -214,24 +214,24 @@
 							<!-- /.col- -->
 							<div class="col-12">
 								<div class="quote-form">
-									<form action="#" class="theme-form-one">
+									<form  class="theme-form-one" onsubmit="miFuncion(event)">
 										<div class="row">
-											<div class="col-md-6"><input type="text" placeholder="Nombre*"></div>
-											<div class="col-md-6"><input type="text" placeholder="Telefono*"></div>
-											<div class="col-md-6"><input type="email" placeholder="Direccion*"></div>
+											<div class="col-md-6"><input type="text" placeholder="Nombre*" required id="nombre" name="nombre"></div>
+											<div class="col-md-6"><input type="text" placeholder="Telefono*" required id="phone" name="phone"></div>
+											<div class="col-md-6"><input type="email" placeholder="Correo electrónico*" required id="email" name="email"></div>
 											<div class="col-md-6">
-												<select class="form-control" id="exampleSelect1">
-											      <option>Elige un servicio</option>
-											      <option>Sotware a la medida</option>
-											      <option>Lading Page</option>
-											      <option>Sitio Web</option>
-											      <option>Distribuidor</option>
+												<select class="form-control"  required id="services" name="services">
+											      <option value="Elige un servicio">Elige un servicio</option>
+											      <option value="Sotware a la medida">Sotware a la medida</option>
+											      <option value="Lading Page">Lading Page</option>
+											      <option value="Sitio Web">Sitio Web</option>
+											      <option value="Distribuidor">Distribuidor</option>
 											    </select>
 											</div>
-											<div class="col-12"><textarea placeholder="Tu mensaje"></textarea></div>
+											<div class="col-12"><textarea placeholder="Tu mensaje" required id="mensaje" name="mensaje"></textarea></div>
 										</div> <!-- /.row -->
-										<div class="g-recaptcha" data-sitekey="6Lc1xzMpAAAAAMGua2f3rcboBNkowH60lGRlY6tg"></div>
-										<button class="theme-button-one">Enviar</button>
+										<div class="g-recaptcha" data-sitekey="6Lc1xzMpAAAAAMGua2f3rcboBNkowH60lGRlY6tg" style="padding-bottom:10px" required></div>
+										<button class="theme-button-one"  type="submit" >Enviar</button>
 									</form>
 								</div> <!-- /.quote-form -->
 							</div>
@@ -623,6 +623,7 @@
 
     	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     	<!-- jQuery -->
+    
 		<script src="vendor/jquery.2.2.3.min.js"></script>
 		<!-- Popper js -->
 		<script src="vendor/popper.js/popper.min.js"></script>
@@ -652,8 +653,34 @@
 		<!-- Theme js -->
 		<script src="js/theme.js"></script>
 		<!--<script src="js/map-script.js"></script> -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=Past Your Google Map Key Here"></script>
-		<script src="js/googlemap.js"></script>
+
+		<script>
+		const nombre = document.getElementById("nombre")
+		const mail = document.getElementById("email")
+		const phone = document.getElementById("phone")
+		const mensaje = document.getElementById("mensaje")
+		const services = document.getElementById("services")
+		
+		     function miFuncion(event) {
+		        event.preventDefault();
+                var response = grecaptcha.getResponse();
+            
+                if(response.length == 0){
+                 console.log("Captcha no verificado")
+                } else {
+                  alert("Correo Enviado");
+                   $.ajax({
+        				url:"/correoHome.php",
+        				data:{nombre:nombre.value, email:mail.value, telefono:phone.value, mensaje:mensaje.value , servicio:services.value},
+        				method:'POST',
+
+        			});
+                }
+              }
+		</script>
+		
 		</div> <!-- /.main-page-wrapper -->
 	</body>
+	
+	
 </html>
